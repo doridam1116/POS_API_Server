@@ -20,4 +20,18 @@ public class BranchController {
     ){
         return branchService.branchSetting(branch);
     }
+
+    @GetMapping("/employee/change")
+    public ResponseEntity<?> changeEmployee(
+            @RequestParam int employeeNo
+    ){
+        return branchService.changeEmployee(employeeNo);
+    }
+
+    @GetMapping("/employee/find")
+    public ResponseEntity<?> findEmployee(
+            @RequestParam int employeeNo
+    ){
+        return branchService.findEmployee(employeeNo);
+    }
 }

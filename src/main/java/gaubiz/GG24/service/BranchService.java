@@ -5,4 +5,8 @@ import org.springframework.http.ResponseEntity;
 
 public interface BranchService {
     ResponseEntity<?> branchSetting(Branch branch);
+
+    ResponseEntity<?> changeEmployee(int employeeNo);
+
+    ResponseEntity<?> findEmployee(int employeeNo);
 }

@@ -4,12 +4,18 @@
 <mapper namespace="BranchMapper">
 
     <select id="selectBranch" resultType="Branch">
-        SELECT B.BRANCH_UUID, E.EMPLOYEE_NO
+        SELECT B.BRANCH_UUID, B.BRANCH_NAME, E.EMPLOYEE_NO, E.EMPLOYEE_NAME
           FROM BRANCH_TBL B
           JOIN EMPLOYEE_TBL E
             ON B.BRANCH_UUID = E.BRANCH_UUID
          WHERE B.BRANCH_UUID = #{branchUuid}
            AND E.EMPLOYEE_NO = #{employeeNo}
+    </select>
+
+    <select id="selectEmployee" resultType="Branch">
+        SELECT *
+          FROM EMPLOYEE_TBL
+         WHERE EMPLOYEE_NO = #{employeeNo}
     </select>
 
 </mapper>

@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Branch {
+public class Employee {
     private String branchUuid;
-    private String branchName;
     private int employeeNo;
     private String employeeName;
-
+    private Date attendanceIn;
+    private Date attendanceOut;
 }
