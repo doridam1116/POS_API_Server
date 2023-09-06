@@ -61,8 +61,6 @@ public class BranchServiceLogic implements BranchService {
         }else {
             result = branchRepository.insertAttendanceOut(employee);
         }
-
-
         if(result > 0){
             return ResponseEntity.ok().body("성공");
         }else {
