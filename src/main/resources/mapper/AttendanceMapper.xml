@@ -4,7 +4,7 @@
 <mapper namespace="AttendanceMapper">
 
     <select id="selectAttendance" resultType="Employee">
-        SELECT ATT.BRANCH_UUID, EMP.EMPLOYEE_NO, EMP.EMPLOYEE_NAME, TO_CHAR(ATT.ATTENDANCE_IN, 'hh:mm:ss') AS ATTENDANCE_IN, TO_CHAR(ATT.ATTENDANCE_OUT, 'hh:mm:ss') AS ATTENDANCE_OUT
+        SELECT ATT.BRANCH_UUID, EMP.EMPLOYEE_NO, EMP.EMPLOYEE_NAME, TO_CHAR(ATT.ATTENDANCE_IN, 'MM/DD hh24:mi:ss') AS ATTENDANCE_IN, TO_CHAR(ATT.ATTENDANCE_OUT, 'MM/DD hh24:mi:ss') AS ATTENDANCE_OUT
           FROM EMPLOYEE_ATTENDANCE_TBL ATT
           JOIN EMPLOYEE_TBL EMP
             ON EMP.EMPLOYEE_NO = ATT.EMPLOYEE_NO
@@ -15,19 +15,25 @@
         SELECT *
           FROM EMPLOYEE_ATTENDANCE_TBL
          WHERE EMPLOYEE_NO = #{employeeNo}
+           AND ATTENDANCE_DATE = SYSDATE
     </select>
 
-    <insert id="insertAttendanceIn">
+   <insert id="insertAttendanceData">
+       INSERT INTO EMPLOYEE_ATTENDANCE_TBL
+            VALUES (#{branchUuid}, #{employeeNo}, null, null, SYSDATE)
+   </insert>
+
+    <update id="insertAttendanceIn">
         UPDATE EMPLOYEE_ATTENDANCE_TBL
            SET ATTENDANCE_IN = SYSDATE
          WHERE EMPLOYEE_NO = #{employeeNo}
-    </insert>
+    </update>
 
-    <insert id="insertAttendanceOut">
+    <update id="insertAttendanceOut">
         UPDATE EMPLOYEE_ATTENDANCE_TBL
            SET ATTENDANCE_OUT = SYSDATE
          WHERE EMPLOYEE_NO = #{employeeNo}
-    </insert>
+    </update>
 
 
 </mapper>
