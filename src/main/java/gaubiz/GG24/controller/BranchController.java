@@ -42,4 +42,10 @@ public class BranchController {
     ){
         return branchService.attendanceEmployee(employee);
     }
+    @PostMapping("/employee/attendance")
+    public ResponseEntity<?> attendanceEmployee2(
+            @RequestBody Employee employee
+    ){
+        return branchService.attendanceEmployee(employee);
+    }
 }
