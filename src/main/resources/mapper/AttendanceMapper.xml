@@ -4,11 +4,30 @@
 <mapper namespace="AttendanceMapper">
 
     <select id="selectAttendance" resultType="Employee">
-        SELECT ATT.*, EMP.EMPLOYEE_NAME
+        SELECT ATT.BRANCH_UUID, EMP.EMPLOYEE_NO, EMP.EMPLOYEE_NAME, TO_CHAR(ATT.ATTENDANCE_IN, 'hh:mm:ss') AS ATTENDANCE_IN, TO_CHAR(ATT.ATTENDANCE_OUT, 'hh:mm:ss') AS ATTENDANCE_OUT
           FROM EMPLOYEE_ATTENDANCE_TBL ATT
           JOIN EMPLOYEE_TBL EMP
             ON EMP.EMPLOYEE_NO = ATT.EMPLOYEE_NO
          WHERE EMP.EMPLOYEE_NO = #{employeeNo}
     </select>
+
+    <select id="selectAttendanceByEmployeeNo" resultType="Employee">
+        SELECT *
+          FROM EMPLOYEE_ATTENDANCE_TBL
+         WHERE EMPLOYEE_NO = #{employeeNo}
+    </select>
+
+    <insert id="insertAttendanceIn">
+        UPDATE EMPLOYEE_ATTENDANCE_TBL
+           SET ATTENDANCE_IN = SYSDATE
+         WHERE EMPLOYEE_NO = #{employeeNo}
+    </insert>
+
+    <insert id="insertAttendanceOut">
+        UPDATE EMPLOYEE_ATTENDANCE_TBL
+           SET ATTENDANCE_OUT = SYSDATE
+         WHERE EMPLOYEE_NO = #{employeeNo}
+    </insert>
+
 
 </mapper>

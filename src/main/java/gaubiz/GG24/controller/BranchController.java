@@ -1,6 +1,7 @@
 package gaubiz.GG24.controller;
 
 import gaubiz.GG24.model.Branch;
+import gaubiz.GG24.model.Employee;
 import gaubiz.GG24.service.BranchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,12 @@ public class BranchController {
             @RequestParam int employeeNo
     ){
         return branchService.findEmployee(employeeNo);
+    }
+
+    @PostMapping("/employee/attendance")
+    public ResponseEntity<?> attendanceEmployee(
+            @RequestBody Employee employee
+    ){
+        return branchService.attendanceEmployee(employee);
     }
 }

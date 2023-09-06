@@ -9,4 +9,10 @@ public interface BranchRepository {
     Branch selectEmployee(int employee);
 
     Employee selectEmployeeAttendance(int employeeNo);
+
+    Employee selectAttendanceByEmployeeNo(Employee employee);
+
+    int insertAttendanceIn(Employee employee);
+
+    int insertAttendanceOut(Employee employee);
 }

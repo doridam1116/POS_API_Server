@@ -15,6 +15,6 @@ public class Employee {
     private String branchUuid;
     private int employeeNo;
     private String employeeName;
-    private Date attendanceIn;
-    private Date attendanceOut;
+    private String attendanceIn;
+    private String attendanceOut;
 }

@@ -22,7 +22,9 @@ public class BranchServiceLogic implements BranchService {
         if(data != null){
             return ResponseEntity.ok().body(data);
         }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("데이터 없음");
+            data = new Branch();
+            data.setEmployeeName("-");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(data);
         }
     }
 
@@ -32,7 +34,9 @@ public class BranchServiceLogic implements BranchService {
         if(employee != null){
             return ResponseEntity.ok().body(employee);
         }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("없음");
+            employee = new Branch();
+            employee.setEmployeeName("-");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(employee);
         }
     }
 
@@ -42,7 +46,25 @@ public class BranchServiceLogic implements BranchService {
         if(employee != null){
             return ResponseEntity.ok().body(employee);
         }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("없음");
+            employee = new Employee();
+            employee.setEmployeeName("-");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(employee);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> attendanceEmployee(Employee employee) {
+        Employee attendanceData = branchRepository.selectAttendanceByEmployeeNo(employee);
+        int result;
+        if(attendanceData.getAttendanceIn() == null){
+            result = branchRepository.insertAttendanceIn(employee);
+        }else {
+            result = branchRepository.insertAttendanceOut(employee);
+        }
+        if(result > 0){
+            return ResponseEntity.ok().body("성공");
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("실패");
         }
     }
 }
