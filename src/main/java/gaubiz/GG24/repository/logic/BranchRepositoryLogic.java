@@ -37,11 +37,17 @@ public class BranchRepositoryLogic implements BranchRepository {
 
     @Override
     public int insertAttendanceIn(Employee employee) {
-        return session.insert("AttendanceMapper.insertAttendanceIn", employee);
+        return session.update("AttendanceMapper.updateAttendanceIn", employee);
     }
 
     @Override
     public int insertAttendanceOut(Employee employee) {
-        return session.insert("AttendanceMapper.insertAttendanceOut", employee);
+        return session.update("AttendanceMapper.updateAttendanceOut", employee);
+    }
+
+    @Override
+    public Employee insertAttendanceData(Employee employee) {
+        session.insert("AttendanceMapper.insertAttendanceData",employee);
+        return session.selectOne("AttendanceMapper.selectAttendanceByEmployeeNo",employee);
     }
 }

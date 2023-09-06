@@ -15,4 +15,6 @@ public interface BranchRepository {
     int insertAttendanceIn(Employee employee);
 
     int insertAttendanceOut(Employee employee);
+
+    Employee insertAttendanceData(Employee employee);
 }
