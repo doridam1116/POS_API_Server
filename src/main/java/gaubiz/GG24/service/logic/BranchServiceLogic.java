@@ -45,27 +45,23 @@ public class BranchServiceLogic implements BranchService {
 
     @Override
     public ResponseEntity<?> findEmployee(int employeeNo) {
-        Employee employee = branchRepository.selectEmployeeAttendance(employeeNo);
-        if(employee != null){
-            return ResponseEntity.ok().body(employee);
-        }else {
-            employee = new Employee();
-            employee.setEmployeeName("-");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(employee);
+        Employee attendanceData = branchRepository.selectEmployeeAttendance(employeeNo);
+
+        if(attendanceData == null){
+            branchRepository.insertAttendanceData(employeeNo);
+            attendanceData = branchRepository.selectEmployeeAttendance(employeeNo);
         }
+
+        return ResponseEntity.ok().body(attendanceData);
     }
 
     @Override
     public ResponseEntity<?> attendanceEmployee(Employee employee) {
-        Employee attendanceData = branchRepository.selectAttendanceByEmployeeNo(employee);
-
-        if(attendanceData == null){
-            attendanceData = branchRepository.insertAttendanceData(employee);
-        }
+        Employee attendanceData = branchRepository.selectEmployeeAttendance(employee.getEmployeeNo());
 
         int result;
 
-        if(Objects.requireNonNull(attendanceData).getAttendanceIn() == null){
+        if(attendanceData.getAttendanceIn() == null){
             result = branchRepository.insertAttendanceIn(employee);
         }else {
             result = branchRepository.insertAttendanceOut(employee);
@@ -75,5 +71,8 @@ public class BranchServiceLogic implements BranchService {
         }else {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("실패");
         }
+
+
+
     }
 }
