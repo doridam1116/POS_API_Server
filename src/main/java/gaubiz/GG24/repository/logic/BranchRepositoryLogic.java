@@ -30,19 +30,13 @@ public class BranchRepositoryLogic implements BranchRepository {
     }
 
     @Override
-    public Employee selectAttendanceByEmployeeNo(Employee employee) {
-        return session.selectOne("AttendanceMapper.selectAttendanceByEmployeeNo",employee);
-
-    }
-
-    @Override
     public int insertAttendanceIn(Employee employee) {
-        return session.update("AttendanceMapper.updateAttendanceIn", employee);
+        return session.update("AttendanceMapper.insertAttendanceIn", employee);
     }
 
     @Override
     public int insertAttendanceOut(Employee employee) {
-        return session.update("AttendanceMapper.updateAttendanceOut", employee);
+        return session.update("AttendanceMapper.insertAttendanceOut", employee);
     }
 
     @Override

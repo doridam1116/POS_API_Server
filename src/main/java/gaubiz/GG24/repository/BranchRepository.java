@@ -10,7 +10,6 @@ public interface BranchRepository {
 
     Employee selectEmployeeAttendance(int employeeNo);
 
-    Employee selectAttendanceByEmployeeNo(Employee employee);
 
     int insertAttendanceIn(Employee employee);
 
