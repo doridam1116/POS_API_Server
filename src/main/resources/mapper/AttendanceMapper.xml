@@ -28,12 +28,14 @@
         UPDATE EMPLOYEE_ATTENDANCE_TBL
            SET ATTENDANCE_IN = SYSDATE
          WHERE EMPLOYEE_NO = #{employeeNo}
+           AND ATTENDANCE_DATE = TO_DATE(sysdate, 'YYYY-MM-DD')
     </update>
 
     <update id="insertAttendanceOut">
         UPDATE EMPLOYEE_ATTENDANCE_TBL
            SET ATTENDANCE_OUT = SYSDATE
          WHERE EMPLOYEE_NO = #{employeeNo}
+           AND ATTENDANCE_DATE = TO_DATE(sysdate, 'YYYY-MM-DD')
     </update>
 
 
